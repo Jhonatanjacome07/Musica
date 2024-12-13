@@ -10,15 +10,15 @@ export const registerUser = async (formData: Omit<RegisterFormValues, 'confirmPa
     try {
         console.log("Datos enviados al backend:", formData);
 
-        const response = await fetch("http://144.33.15.219:8080/auth/register", {
+        const response = await fetch("/api/auth/register", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData), 
+            body: JSON.stringify(formData),
         });
 
-        console.log("Estado de la respuesta:", response.status); 
+        console.log("Estado de la respuesta:", response.status);
         if (!response.ok) {
             const errorData = await response.json();
             console.error("Error en la respuesta:", errorData);
@@ -26,7 +26,7 @@ export const registerUser = async (formData: Omit<RegisterFormValues, 'confirmPa
         }
 
         const result: ApiResponse = await response.json();
-        console.log("Respuesta procesada:", result); 
+        console.log("Respuesta procesada:", result);
         return result;
     } catch (error: any) {
         console.error("Error al registrar el usuario:", error.message);
